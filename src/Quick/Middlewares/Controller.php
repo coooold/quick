@@ -4,7 +4,7 @@ namespace Quick\Middlewares;
 
 use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequest;
-use Quick\FISResource;
+use Quick\Utils\FISResource;
 
 class Controller {
 
