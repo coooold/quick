@@ -17,12 +17,14 @@
         "monolog/monolog": "^1.23",
         "doctrine/annotations": "^1.6",
         "php-curl-class/php-curl-class": "^8.1",
-        "relay/relay": "2.x@dev",
         "zendframework/zend-diactoros": "^1.8",
         "aura/router": "^3.1",
         "psr/http-server-handler": "^1.0",
         "psr/simple-cache": "^1.0",
         "desarrolla2/cache": "^2.1"
+    },
+    "require-dev": {
+        "relay/relay": "2.x@dev"
     },
     "autoload": {
         "psr-4": {
