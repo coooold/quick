@@ -15,7 +15,7 @@ require __DIR__ . '/Utils/functions.php';
 
 use DI\ContainerBuilder;
 use Aura\Router\RouterContainer;
-use Relay\Relay;
+use Quick\Middlewares\Dispatcher;
 use Zend\Diactoros\ServerRequestFactory;
 use Quick\Middlewares\RequestHandler;
 use Quick\Middlewares\ResponseEmitter;
@@ -55,8 +55,8 @@ class Quick {
             \di(RequestHandler::class),
         ];
 
-        $relay = new Relay($queue);
-        $relay->handle(ServerRequestFactory::fromGlobals());
+        $dispatcher = new Dispatcher($queue);
+        $dispatcher->handle(ServerRequestFactory::fromGlobals());
     }
 
     ///////////////// 下面是一些工具函数
