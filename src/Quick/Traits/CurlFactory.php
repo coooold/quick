@@ -5,7 +5,7 @@ namespace Quick\Traits;
 trait CurlFactory {
     /**
      * @Inject
-     * @var \Quick\CurlFactory
+     * @var \Quick\Utils\CurlFactory
      */
     private $curlFactory;
 }
