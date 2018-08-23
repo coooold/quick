@@ -109,10 +109,19 @@ class Quick {
      * @throws \Exception
      */
     static public function flock($name) {
+        $runtimePath = \di('runtime_path');
+        if (!$runtimePath || !is_dir($runtimePath)) {
+            throw new \Exception('runtime_path does not exist');
+        }
+
+        $lockPath = "{$runtimePath}/locks";
+        if (!file_exists($lockPath)) {
+            mkdir($lockPath);
+        }
+
         static $fps = [];
         if (!isset($fps[$name])) {
-            $logPath = __DIR__ . '/../log';
-            $lockFile = "{$logPath}/{$name}.lock";
+            $lockFile = "{$lockPath}/{$name}.lock";
             $fps[$name] = fopen($lockFile, 'a');
         }
 
