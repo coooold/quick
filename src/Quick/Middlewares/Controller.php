@@ -16,6 +16,25 @@ class Controller {
     /** @var \Zend\Diactoros\ServerRequest */
     protected $request;
 
+    /** @var array [RequestHandler] */
+    protected $middlewares = [];
+
+    /**
+     * 返回控制器的前置中间件
+     * @return array [RequestHandler]
+     */
+    public function getMiddlewares() {
+        return $this->middlewares;
+    }
+
+    /**
+     * 由于不能使用__construct，改用initialize
+     * @return bool true继续执行，false停止执行
+     */
+    protected function initialize(): bool {
+        return true;
+    }
+
     /**
      * 输出json格式
      * @param $data
@@ -63,6 +82,12 @@ class Controller {
      */
     public function __invoke(ServerRequest $request): Response {
         $this->request = $request;
+
+        // 执行初始化方法，如果返回false，那么停止执行后续方法
+        if (!$this->initialize()) {
+            return $this->response;
+        }
+
         $method = $request->getAttribute('method');
 
         if (!method_exists($this, $method)) {

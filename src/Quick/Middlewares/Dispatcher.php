@@ -33,6 +33,12 @@ class Dispatcher implements RequestHandlerInterface {
      */
     public function handle(ServerRequestInterface $request): ResponseInterface {
         $middleware = current($this->queue);
+
+        // 如果是字符串，则创建对应实例
+        if(is_string($middleware)) {
+            $middleware = \di($middleware);
+        }
+
         next($this->queue);
 
         return $middleware($request, $this);

@@ -56,6 +56,12 @@ class Quick {
         ];
 
         $dispatcher = new Dispatcher($queue);
+
+        // 如果传入类型是application/json，那么重置$_POST
+        if (isset($_SERVER['CONTENT_TYPE']) && strpos($_SERVER['CONTENT_TYPE'], 'json') !== false) {
+            $_POST = \json_decode(file_get_contents("php://input"), true);
+        }
+
         $dispatcher->handle(ServerRequestFactory::fromGlobals());
     }
 
