@@ -18,7 +18,11 @@ return [
 
         $routerConfs = $container->get('router');
         foreach ($routerConfs as $name => $conf) {
-            $map->route($name, $conf['path'], $conf['handler'])->allows($conf['method']);
+            $route = $map->route($name, $conf['path'], $conf['handler'])->allows($conf['method']);
+            // 可以定义参数的格式
+            if (isset($conf['tokens'])) {
+                $route->tokens($conf['tokens']);
+            }
         }
         return $routerContainer;
     },
